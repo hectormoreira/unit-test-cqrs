@@ -15,7 +15,7 @@ namespace Education.Persistence
             
         }
 
-        protected EducationDbContext(DbContextOptions<EducationDbContext> options) : base(options)
+        public EducationDbContext(DbContextOptions<EducationDbContext> options) : base(options)
         { }
 
         public DbSet<Course> Courses { get; set; }
