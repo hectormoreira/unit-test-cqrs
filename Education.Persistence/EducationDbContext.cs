@@ -24,7 +24,7 @@ namespace Education.Persistence
         {
             if (!options.IsConfigured)
             {
-                options.UseSqlServer("Server=.;database=EducationCqrs;Trusted_Connection=True;MultipleActiveResultSets=True");
+                options.UseSqlServer("Server=ADMINPC\\SQLEXPRESS;database=EducationCqrs;Trusted_Connection=True;MultipleActiveResultSets=True;");
             }
         }
 

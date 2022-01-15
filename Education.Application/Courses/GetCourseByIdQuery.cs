@@ -22,9 +22,9 @@ namespace Education.Application.Courses
         public class GetCourseByIdQueryHandler : IRequestHandler<GetCourseByIdQueryRequest, CourseDto>
         {
             private readonly EducationDbContext _dbContext;
-            private readonly Mapper _mapper;
+            private readonly IMapper _mapper;
 
-            public GetCourseByIdQueryHandler(EducationDbContext dbContext, Mapper mapper)
+            public GetCourseByIdQueryHandler(EducationDbContext dbContext, IMapper mapper)
             {
                 _dbContext = dbContext;
                 _mapper = mapper;

@@ -22,12 +22,12 @@ namespace Education.Application.Courses
         public class GetCourseQueryHandler : IRequestHandler<GetCourseQueryRequest, List<CourseDto>>
         {
             private readonly EducationDbContext _dbContext;
-            private readonly Mapper _mapper;
+            private readonly IMapper _mapper;
 
-
-            public GetCourseQueryHandler(EducationDbContext dbContext)
+            public GetCourseQueryHandler(EducationDbContext dbContext, IMapper mapper)
             {
                 _dbContext = dbContext;
+                _mapper = mapper;
             }
 
             public async Task<List<CourseDto>> Handle(GetCourseQueryRequest request, CancellationToken cancellationToken)
