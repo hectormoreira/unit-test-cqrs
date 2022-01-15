@@ -22,11 +22,11 @@ namespace Education.Domain
 
         [DataType(DataType.Date)]
         [DateInFuture]
-        public DateTime? PublicationOn { get; set; }
+        public DateTime? PublishOn { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime? CreatedOn { get; set; }
 
-        public float Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

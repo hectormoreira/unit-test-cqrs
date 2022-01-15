@@ -28,7 +28,7 @@ namespace Education.Persistence
                     Description = "Curso de C#",
                     Title = "Curso de C# Avanzado",
                     CreatedOn = DateTime.Now,
-                    PublicationOn = DateTime.Now.AddYears(2),
+                    PublishOn = DateTime.Now.AddYears(2),
                     Price = 100
                 }
             );
@@ -40,7 +40,7 @@ namespace Education.Persistence
                     Description = "Curso de React Native",
                     Title = "Curso de React Native Avanzado",
                     CreatedOn = DateTime.Now,
-                    PublicationOn = DateTime.Now.AddYears(2),
+                    PublishOn = DateTime.Now.AddYears(2),
                     Price = 40
                 }
             );
@@ -52,7 +52,7 @@ namespace Education.Persistence
                     Description = "Master en Unit Test",
                     Title = "Curso de Unit Test Avanzado",
                     CreatedOn = DateTime.Now,
-                    PublicationOn = DateTime.Now.AddYears(2),
+                    PublishOn = DateTime.Now.AddYears(2),
                     Price = 1000
                 }
             );
