@@ -3,6 +3,7 @@ using AutoMapper;
 using Education.Application.Helper;
 using Education.Domain;
 using Education.Persistence;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
@@ -14,9 +15,9 @@ using System.Threading.Tasks;
 namespace Education.Application.Courses
 {
     [TestFixture]
-    public class GetCourseQueryNUnitTest
+    public class CreateCourseCommandNUnitTests
     {
-        private GetCourseQuery.GetCourseQueryHandler handlerAllCourses;
+        private CreateCourseCommand.CreateCourseCommandHandler handlerCourseCreate;
 
         [SetUp]
         public void Setup()
@@ -25,13 +26,13 @@ namespace Education.Application.Courses
             var courseRecords = fixture.CreateMany<Course>().ToList();
 
             courseRecords.Add(fixture.Build<Course>()
-                .With(tr => tr.CourseId, Guid.Empty)
-                .Create()
-                );
+            .With(tr => tr.CourseId, Guid.Empty)
+            .Create()
+            );
 
             var options = new DbContextOptionsBuilder<EducationDbContext>()
-                .UseInMemoryDatabase(databaseName: $"EducationDbContext-{Guid.NewGuid()}")
-                .Options;
+            .UseInMemoryDatabase(databaseName: $"EducationDbContext-{Guid.NewGuid()}")
+            .Options;
 
             var educationDbContextFake = new EducationDbContext(options);
             educationDbContextFake.Courses.AddRange(courseRecords);
@@ -42,18 +43,24 @@ namespace Education.Application.Courses
             });
             var mapper = mapConfig.CreateMapper();
 
-            handlerAllCourses = new GetCourseQuery.GetCourseQueryHandler(educationDbContextFake, mapper);
-
-
+            handlerCourseCreate = new CreateCourseCommand.CreateCourseCommandHandler(educationDbContextFake);
         }
 
 
         [Test]
-        public void GetCourseQueryHandler_GetCourses_ReturnsTrue()
+        public async Task CreateCourseCommand_InputtCourses_ReturnsUnit()
         {
-            // 1 emulate context
-            // 2 emulate mapping profile
-            // 3 Instance class object GetCourseQueryHandler and send context and mapping
+            CreateCourseCommand.CreateCourseCommandRequest request = new();
+
+            request.PublishOn = DateTime.UtcNow.AddDays(53);
+            request.Title = "Libro de Unit Test en .Net";
+            request.Description = "Aprende a crear pruebas unitarias en .Net";
+            request.Price = 99;
+
+
+            var results = await handlerCourseCreate.Handle(request, new CancellationToken());
+
+            Assert.That(results, Is.EqualTo(Unit.Value));
         }
     }
 }
